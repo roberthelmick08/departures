@@ -13,9 +13,5 @@ export async function fetchDepartures() {
     config
   );
 
-  console.log(
-    'DEPARTURES',
-    response.data.route_departures[0].itineraries[0].schedule_items
-  );
   return response.data.route_departures[0].itineraries[0].schedule_items;
 }
