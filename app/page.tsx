@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className='items-center'>
       <h1 className={'text-center'}>Route 73 to Bellevue Station</h1>
-      <div className='flex justify-around'>
+      <div className='flex justify-center'>
         <Icon></Icon>
         <div>
           <h3 className={'text-center'}>from Quebec & 29th Ave</h3>
