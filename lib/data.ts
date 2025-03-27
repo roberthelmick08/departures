@@ -9,7 +9,7 @@ const config = {
 
 export async function fetchDepartures() {
   const response = await axios.get<{ route_departures: RouteDeparture[] }>(
-    `https://external.transitapp.com/v3/public/stop_departures?global_stop_id=RTD:64255`,
+    `/departures`,
     config
   );
 
