@@ -6,8 +6,8 @@ export default function ListItem({ listItem }: { listItem: ScheduleItem }) {
   const now = moment(new Date());
   const end = moment(time);
   const duration = moment.duration(end.diff(now));
-  const minuteDiff = Math.floor(duration.asMinutes());
-  const formattedTime = moment(time).format('hh:mm A');
+  const minuteDiff = Math.round(duration.asMinutes());
+  const formattedTime = moment(time).format('h:mm A');
 
   if (listItem.is_cancelled) {
     return <li className='text-red-600 font-bold'>CANCELLED</li>;
