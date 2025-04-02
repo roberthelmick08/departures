@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
@@ -6,16 +8,63 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import DepartureBoardIcon from '@mui/icons-material/DepartureBoard'; // Upcoming departure
-import RedoIcon from '@mui/icons-material/Redo'; // Next departure
-import AirlineStopsIcon from '@mui/icons-material/AirlineStops'; // 3rd departure
-// import NoTransferIcon from '@mui/icons-material/NoTransfer';  // Cancelled
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Typography from '@mui/material/Typography';
+import { fetchDepartures } from '@/lib/data';
+import { ScheduleItem } from '@/types/types';
+import ListItem from './list-item';
+import LinearProgress from '@mui/material/LinearProgress';
+import moment from 'moment';
 
 export default function TimelineComponent() {
+  const [departures, setDepartures] = React.useState<ScheduleItem[]>([]);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [refreshTimestamp, setRefreshTimestamp] = React.useState<string>(
+    moment(new Date()).format('MM/DD/YYYY [at] hh:mm:ss a')
+  );
+
+  const getDepartures = async () => {
+    return await fetchDepartures()
+      .then((res: ScheduleItem[]) => {
+        setIsLoading(false);
+        setDepartures(res);
+        setRefreshTimestamp(
+          moment(new Date()).format('MM/DD/YYYY [at] hh:mm:ss a')
+        );
+      })
+      .catch((err: Error) => {
+        setIsLoading(false);
+        throw err;
+      });
+  };
+
+  React.useEffect(() => {
+    getDepartures();
+
+    const interval = setInterval(async () => {
+      getDepartures().catch((err: Error) => {
+        console.error(err);
+        clearInterval(interval);
+      });
+    }, 30 * 1000);
+  }, []);
+
+  if (!departures.length && !isLoading) {
+    return (
+      <Typography
+        variant='h5'
+        component='div'
+        color='error'
+        className='text-center'>
+        Unable to retrieve departure data
+      </Typography>
+    );
+  } else if (!departures.length && isLoading) {
+    return <LinearProgress />;
+  }
+
   return (
-    <div>
+    <div className='mt-4'>
       <Typography
         variant='h5'
         component='div'
@@ -31,62 +80,13 @@ export default function TimelineComponent() {
             padding: 0,
           },
         }}>
-        <TimelineItem>
-          <TimelineOppositeContent
-            sx={{ m: 'auto 0' }}
-            variant='body2'
-            align='center'>
-            in 8 minutes
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineConnector />
-            <TimelineDot color='success'>
-              <DepartureBoardIcon />
-            </TimelineDot>
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ m: 'auto 0' }}>
-            <Typography variant='h6' component='span'>
-              9:30 am
-            </Typography>
-          </TimelineContent>
-        </TimelineItem>
-
-        <TimelineItem>
-          <TimelineOppositeContent sx={{ m: 'auto 0' }} variant='body2'>
-            in 38 minutes
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineConnector />
-            <TimelineDot color='primary' variant='outlined'>
-              <RedoIcon />
-            </TimelineDot>
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ m: 'auto 0' }}>
-            <Typography variant='h6' component='span'>
-              10:00 am
-            </Typography>
-          </TimelineContent>
-        </TimelineItem>
-
-        <TimelineItem>
-          <TimelineOppositeContent sx={{ m: 'auto 0' }} variant='body2'>
-            in 68 minutes
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineConnector />
-            <TimelineDot color='primary' variant='outlined'>
-              <AirlineStopsIcon />
-            </TimelineDot>
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent sx={{ m: 'auto 0' }}>
-            <Typography variant='h6' component='span'>
-              10:30 am
-            </Typography>
-          </TimelineContent>
-        </TimelineItem>
+        {departures.map((departure: ScheduleItem, index: number) => {
+          return (
+            <div key={departure.rt_trip_id}>
+              <ListItem listItem={departure} index={index} />
+            </div>
+          );
+        })}
 
         <TimelineItem>
           <TimelineOppositeContent
@@ -103,8 +103,11 @@ export default function TimelineComponent() {
         </TimelineItem>
       </Timeline>
 
-      <Typography variant='body2' component='div' className='text-center italic'>
-        Data up to date as of 01/01/01 9:22:27 am
+      <Typography
+        variant='body2'
+        component='div'
+        className='text-center italic'>
+        Data refreshed {refreshTimestamp}
       </Typography>
     </div>
   );
