@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- PROJECT SHIELDS -->
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/departures-snowy)
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project URL
+https://departures-snowy.vercel.app/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## About The Project
+In my pursuit to make the bus stop in front of my house the best bus stop in Denver, I developed the Departures app to give riders real-time departure information. Since road conditions are ever-changing and buses often get stuck in traffic or at stop lights, the app polls the Transit API at 30 second intervals to provide riders the most up-to-date departure estimates.
 
-## Learn More
+Why the ![Transit API]([Transit-url])?
+* It leverages publicly available GFTS data and crowdsourced location data for the most accurate departure information possible.
+* Real-time data can accurately predict departure times in case of delays.
+* Cancellations can be communicated to the rider.
 
-To learn more about Next.js, take a look at the following resources:
+The mobile-first design is ready for on-the-go riders to easily view the important departure times.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Light Mode             |  Dark Mode
+:-------------------------:|:-------------------------:
+<img width="386" alt="image" src="https://github.com/user-attachments/assets/d347b99d-0899-4557-a93b-0a316738be1d" /> | <img width="386" alt="image" src="https://github.com/user-attachments/assets/8e4ab37e-6930-403b-a305-93b24f6c7ab2" />
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Built With
+[![Next][Next.js]][Next-url]
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[![React][React.js]][React-url]
+
+[![MUI][MUI]][MUI-url]
+
+[![Transit][Transit-api]][Transit-url]
+
+[![Vercel][Vercel]][Vercel-url]
+
+
+
+## Contact
+Robert Temmick - [LinkedIn]([linkedin-url) - robert.temmick@gmail.com
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[Transit-api]: https://img.shields.io/badge/Transit-30B566?style=for-the-badge&logoColor=white
+[Transit-url]: https://transitapp.com/
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[MUI]: https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white
+[MUI-url]: https://mui.com/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vercel]: https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white
+[Vercel-url]: https://vercel.com/
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/roberttemmick
+
