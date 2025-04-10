@@ -11,7 +11,7 @@ https://departures-snowy.vercel.app/
 ## About The Project
 In my pursuit to make the bus stop in front of my house the best bus stop in Denver, I developed the Departures app to give riders real-time departure information. Since road conditions are ever-changing and buses often get stuck in traffic or at stop lights, the app polls the Transit API at 30 second intervals to provide riders the most up-to-date departure estimates.
 
-Why the ![Transit API]([Transit-url])?
+Why the [Transit API](https://transitapp.com/)?
 * It leverages publicly available GFTS data and crowdsourced location data for the most accurate departure information possible.
 * Real-time data can accurately predict departure times in case of delays.
 * Cancellations can be communicated to the rider.
@@ -38,7 +38,7 @@ Light Mode             |  Dark Mode
 
 
 ## Contact
-Robert Temmick - [LinkedIn]([linkedin-url) - robert.temmick@gmail.com
+Robert Temmick - [LinkedIn](https://linkedin.com/in/roberttemmick) - robert.temmick@gmail.com
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
